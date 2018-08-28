@@ -3,11 +3,6 @@ import Button from './Button'
 
 class ButtonPanel extends React.Component{
 
-    handleClick(){
-        alert("hello");
-
-    }
-
     renderButton(i){
         return(
         <Button value={i} onClick={()=> this.props.onClick(i)} />

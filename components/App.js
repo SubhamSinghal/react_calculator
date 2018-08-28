@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ButtonPanel from './components/ButtonPanel';
-import Display from './components/Display';
+import ButtonPanel from './ButtonPanel';
+import Display from './Display';
 
 class App extends Component {
 
@@ -72,6 +71,7 @@ class App extends Component {
     let state = Object.assign({},this.state);
     let {ele1, ele2, op, total} = state;
     console.log(i);
+
     switch(i){
       case "AC" :
         this.setState({ele1:"",ele2:"",op:"",total:""});
@@ -137,12 +137,12 @@ class App extends Component {
           this.handleOperator("%");
           break;
         case ".":
-          if(total){
+          if(total && !total.includes(".")){
            total = total + ".";
-          }else if(ele2){
-            ele2 = ele2 + ".";
-          }else if(ele1){
-           ele1 = ele1 + ".";
+          }else if(op && !ele2.includes(".")){
+            ele2 = ele2 ? ele2 + "." : "0.";
+          }else if(!ele1.includes(".")){
+           ele1 = ele1 ? ele1 + "." : "0.";
           }
           this.setState({ele1, ele2, op, total});
           break;
@@ -152,8 +152,8 @@ class App extends Component {
             ele1 = total;
             ele2 = op = total = ""; 
             this.setState({ele1, ele2, op, total});
-            break;
-          }
+          }         
+          break;
       default:
         alert("No Match");
     }
